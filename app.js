@@ -8,7 +8,7 @@
 //Game Values
 let min = 1,
     max = 10,
-    guessesLeft = 3,
+    guessesLeft = 4,
     winningNum = getRandomNum(min,max);
 
 //UI elements
@@ -18,6 +18,7 @@ const UIgame = document.querySelector('#game'),
     UIguessInput = document.querySelector('#guess-input'),
     UIguessBtn = document.querySelector('#guess-btn'),
     UImessage = document.querySelector('.message');
+    UIhintBtn = document.querySelector('#hint-btn');
 
 //Assign UI min and max values
 UIminNum.textContent = min;
@@ -29,6 +30,27 @@ game.addEventListener('mousedown', function (e) {
         window.location.reload();  
     }
 });
+
+//Hint
+game.addEventListener('mouseover', function (e) {
+    if (e.target.id === 'hint-btn') {
+        UIhintBtn.textContent = 'Hint';
+    }
+})
+game.addEventListener('mouseout', function (e) {
+    if (e.target.id === 'hint-btn') {
+        UIhintBtn.innerHTML ='<i class="fas fa-question"></i>';
+    }
+})
+
+//Hint output
+UIhintBtn.addEventListener('click', function () {
+    if (winningNum % 2 === 0) {
+        setMessage(`The correct number is even.`, 'blue');
+    } else {
+        setMessage('The correct number is odd.', 'blue');
+    }
+})
 
 //Listen for guess
 UIguessBtn.addEventListener('click', function (e) {
@@ -76,8 +98,11 @@ function gameOver(won, msg) {
     UIguessBtn.value = 'PLAY AGAIN';
     //add class to bttn
     UIguessBtn.className = 'play-again';
+    //hide hint btn
+    UIhintBtn.style.display = 'none';
 }
 function getRandomNum(min, max) {
+    
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 function setMessage(msg,color) { 
