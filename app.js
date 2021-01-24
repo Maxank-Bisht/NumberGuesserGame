@@ -54,7 +54,7 @@ UIhintBtn.addEventListener('click', function () {
 
 //Listen for guess
 UIguessBtn.addEventListener('click', function (e) {
-    if (e.target.value === 'submit') {
+    if (e.target.value === 'Submit') {
         let guess = parseInt(UIguessInput.value);
     
         //validate input
@@ -97,7 +97,7 @@ function gameOver(won, msg) {
     //play again bttn
     UIguessBtn.value = 'PLAY AGAIN';
     //add class to bttn
-    UIguessBtn.className = 'play-again';
+    UIguessBtn.className = 'play-again btn btn-outline-dark';
     //hide hint btn
     UIhintBtn.style.display = 'none';
 }
@@ -108,4 +108,11 @@ function getRandomNum(min, max) {
 function setMessage(msg,color) { 
     UImessage.textContent = msg;
     UImessage.style.color = color;
+    if (color === 'green') {
+        UImessage.className = `alert alert-success message mt-3`;
+    } else if (color === 'blue') {
+        UImessage.className = `alert alert-info message mt-3`;
+    } else {
+        UImessage.className = `alert alert-danger message mt-3`;
+    }
 }
